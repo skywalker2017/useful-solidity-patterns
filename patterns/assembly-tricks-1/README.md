@@ -31,6 +31,7 @@ try otherContract.foo() {
 } catch (bytes memory revertBytes) {
     // call failed, do some error processing
     // if all else fails, bubble up the revert
+    // revert(start, length), add(revertBytes, 0x20) skip the first 32-bytes which represents the length of the string
     assembly { revert(add(revertBytes, 0x20), mload(revertBytes)) }
 }
 ```
